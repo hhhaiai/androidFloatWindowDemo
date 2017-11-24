@@ -58,7 +58,7 @@ public class WindowService extends Service {
 
     private void initView() {
         mWindowView = LayoutInflater.from(getApplication()).inflate(R.layout.layout_window, null);
-        mPercentTv = (ImageView)mWindowView.findViewById(R.id.percentTv);
+        mPercentTv = (ImageView)mWindowView.findViewById(R.id.imFloat);
     }
 
     private void addWindowView2Window() {
