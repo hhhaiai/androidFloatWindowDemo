@@ -1,4 +1,4 @@
-package com.example.floas.utils;
+package com.example.floas.floats;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import com.example.floas.R;
+import com.example.floas.utils.L;
 
 /**
  * @Copyright © 2017 Umeng Inc. All rights reserved.
@@ -18,11 +19,11 @@ import com.example.floas.R;
  * @author: safei
  * @mail: yongxu.xyf@alibaba-inc.com
  */
-public class Method1 {
+public class MethodA {
 
-    private static WindowManager.LayoutParams wmParams;
-    private static WindowManager mWindowManager;
-    private static View mWindowView;
+    private static WindowManager.LayoutParams wmParams = null;
+    private static WindowManager mWindowManager = null;
+    private static View mWindowView = null;
 
     private static int mStartX = 0;
     private static int mStartY = 0;
@@ -30,7 +31,11 @@ public class Method1 {
     private static int mEndY = 0;
 
     //update   https://github.com/yhaolpz/FixedFloatWindow
-    public static void initView(Context context) {
+    static void initView(Context context) {
+        if (context == null) {
+            L.e("MethodA.initView Context is null");
+            return;
+        }
         mWindowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
         wmParams = new WindowManager.LayoutParams();
         // 更多type：https://developer.android.com/reference/android/view/WindowManager.LayoutParams.html#TYPE_PHONE
@@ -46,11 +51,26 @@ public class Method1 {
         mWindowView = LayoutInflater.from(context).inflate(R.layout.layout_window, null);
         ImageView iv = (ImageView)mWindowView.findViewById(R.id.imFloat);
         addLisener(iv);
+
+        mWindowManager.addView(mWindowView, wmParams);
+    }
+
+    public static boolean show(Context context) {
+        initView(context);
+        return true;
+    }
+
+    public static boolean hide(Context context) {
+        if (mWindowView != null) {
+            // 移除悬浮窗口
+            L.i("removeView");
+            mWindowManager.removeView(mWindowView);
+        }
+        return true;
     }
 
     static void addLisener(View v) {
         v.setOnTouchListener(new View.OnTouchListener() {
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {

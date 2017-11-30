@@ -1,10 +1,12 @@
 package com.example.floas;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import com.example.floas.floats.MethodA;
+import com.example.floas.utils.L;
 
 public class MainActivity extends Activity {
 
@@ -12,7 +14,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startService(new Intent(this, WindowService.class));
+        //startService(new Intent(this, WindowService.class));
     }
 
     @Override
@@ -32,5 +34,23 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View v) {
+        try {
+            int id = v.getId();
+            switch (id) {
+                case R.id.btnTestMethodAShow:
+                    MethodA.show(this);
+                    break;
+                case R.id.btnTestMethodAHide:
+                    MethodA.hide(this);
+                    break;
+                default:
+                    break;
+            }
+        } catch (Throwable e) {
+            L.e(e);
+        }
     }
 }
