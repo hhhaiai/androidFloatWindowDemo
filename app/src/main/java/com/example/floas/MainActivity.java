@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import com.example.floas.floats.MethodA;
+import com.example.floas.floats.MethodB;
 import com.example.floas.utils.L;
 
 public class MainActivity extends Activity {
@@ -45,6 +46,12 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.btnTestMethodAHide:
                     MethodA.hide(this);
+                    break;
+                case R.id.btnTestMethodBShow:
+                    MethodB.show(this);
+                    break;
+                case R.id.btnTestMethodBHide:
+                    MethodB.hide(this);
                     break;
                 default:
                     break;

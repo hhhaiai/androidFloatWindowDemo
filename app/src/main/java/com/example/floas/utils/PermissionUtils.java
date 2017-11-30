@@ -293,7 +293,20 @@ public class PermissionUtils {
     interface PermissionGrant {
         void onPermissionGranted(int requestCode);
     }
-
+    /**
+     * 方便用户判断是否已授予应用悬浮窗权限
+     */
+    public static boolean hasPermission(Context context) {
+        Boolean result;
+        try {
+            Class clazz = Settings.class;
+            Method canDrawOverlays = clazz.getDeclaredMethod("canDrawOverlays", Context.class);
+            result = (Boolean) canDrawOverlays.invoke(null, context);
+        } catch (Exception e) {
+            result = true;
+        }
+        return result;
+    }
     /**
      * @Copyright © 2017 sanbo Inc. All rights reserved.
      * @Description: 简单版本的权限访问

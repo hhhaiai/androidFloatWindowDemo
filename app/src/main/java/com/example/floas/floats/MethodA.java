@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import com.example.floas.R;
 import com.example.floas.utils.L;
 
 /**
  * @Copyright © 2017 Umeng Inc. All rights reserved.
- * @Description: TODO
+ * @Description: 兼容性不强
  * @Version: 1.0
  * @Create: 2017/11/24 17:51
  * @author: safei
@@ -49,8 +48,8 @@ public class MethodA {
         wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
         mWindowView = LayoutInflater.from(context).inflate(R.layout.layout_window, null);
-        ImageView iv = (ImageView)mWindowView.findViewById(R.id.imFloat);
-        addLisener(iv);
+        //ImageView iv = (ImageView)mWindowView.findViewById(R.id.imFloat);
+        addLisener(mWindowView);
 
         mWindowManager.addView(mWindowView, wmParams);
     }
@@ -63,8 +62,14 @@ public class MethodA {
     public static boolean hide(Context context) {
         if (mWindowView != null) {
             // 移除悬浮窗口
-            L.i("removeView");
-            mWindowManager.removeView(mWindowView);
+            L.i("MethodA hide");
+            try {
+                mWindowManager.removeView(mWindowView);
+            } catch (java.lang.IllegalArgumentException e) {
+                L.i("已经隐藏了");
+            } catch (Throwable e) {
+                L.e(e);
+            }
         }
         return true;
     }

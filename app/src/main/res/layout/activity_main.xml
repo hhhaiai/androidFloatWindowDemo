@@ -29,4 +29,25 @@
         android:layout_toEndOf="@+id/btnTestMethodAShow"
         android:onClick="onClick"
         android:text="方法一隐藏"/>
+
+    <Button
+        android:id="@+id/btnTestMethodBShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnTestMethodAShow"
+        android:layout_alignStart="@+id/btnTestMethodAShow"
+        android:layout_below="@+id/btnTestMethodAShow"
+        android:layout_marginTop="42dp"
+        android:onClick="onClick"
+        android:text="方法二展示"/>
+
+    <Button
+        android:id="@+id/btnTestMethodBHide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnTestMethodBShow"
+        android:layout_alignLeft="@+id/btnTestMethodAHide"
+        android:layout_alignStart="@+id/btnTestMethodAHide"
+        android:onClick="onClick"
+        android:text="方法二隐藏"/>
 </RelativeLayout>
